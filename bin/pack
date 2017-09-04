@@ -1,0 +1,39 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use lib 'lib';
+
+use YAML::Tiny;
+use Getopt::Long;
+
+my ($ref) = @ARGV;
+
+$ref ||= `git rev-parse HEAD`;
+chomp $ref;
+
+$ref = substr($ref, 0, 8);
+
+my $stew_snapshot = YAML::Tiny->read('local/stew.snapshot')->[0];
+
+my $os   = $stew_snapshot->{_}->{os};
+my $arch = $stew_snapshot->{_}->{arch};
+
+my $dist    = "stew-example-app-$ref-$os-$arch";
+my $archive = "$dist.tar.gz";
+
+my $tar_options = '';
+
+if (!-f $archive) {
+    system("git ls-files --recurse-submodules > MANIFEST");
+    system("echo $ref > VERSION");
+    system("find local -type f >> MANIFEST");
+    system("echo VERSION >> MANIFEST");
+
+    system("sed -i '/\\.git/d' MANIFEST");
+
+    system sprintf q{cat MANIFEST | tar --transform s#^#%s/# -cvzf %s --files-from=-}, $dist, $archive;
+
+    die "Error creating an archive\n" unless -f $archive;
+}
+
+warn "$archive\n";

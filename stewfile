@@ -1,0 +1,13 @@
+perl
+
+# Toolchain
+libmodule-build-perl
+libmodule-build-tiny-perl
+libfile-sharedir-install-perl
+libdevel-checkcompiler-perl
+
+libplack-perl
+libgazelle-perl
+
+# Cleanup
+libapp-changeshebang-perl

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+BINDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+BASE=`realpath "$BINDIR/../"`
+
+echo 'Installing dependencies'
+
+bin/stew install --base $BASE . "$@" || exit 1
+
+echo 'Fixing perl shebangs'
+
+bin/env -- change-shebang -f -q $BINDIR/../local/bin/*

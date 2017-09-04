@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BINDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+BASE=`realpath "$BINDIR/../"`
+
+ARGV=( "$@" )
+
+export PATH="$BINDIR/:$PATH"
+
+$BINDIR/stew exec --base $BASE "${ARGV[@]}"
