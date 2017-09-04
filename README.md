@@ -10,6 +10,24 @@ you can compile for any platform too.
 
 See this repo's [README](https://github.com/vti/stew-example-repo/blob/master/README.md) too.
 
+## Deployment workflow
+
+1. Copy distribution to server
+
+If on Debian 9 just grab [stew-example-app-0125c086-linux-debian-9-x86_64.tar.gz](https://raw.githubusercontent.com/vti/stew-example-app/master/stew-example-app-0125c086-linux-debian-9-x86_64.tar.gz).
+
+If not take a look at `Developer workflow` section on how to build package for your distribution.
+
+2. Unpack distribution
+
+    tar xzf
+
+3. Start application
+
+    bin/env start
+
+No need to install anything!
+
 ## Developer workflow
 
 1. Bootstrap dependencies
@@ -31,17 +49,4 @@ This packed distribution will contain application, perl, some system libraries a
 
     bin/pack
 
-    # For example
-
-## Deployment workflow
-
-1. Copy distribution to server
-2. Unpack distribution
-
-    tar xzf
-
-3. Start application
-
-    bin/env start
-
-No need to install anything!
+    # stew-example-app-0125c086-linux-debian-9-x86_64.tar.gz
